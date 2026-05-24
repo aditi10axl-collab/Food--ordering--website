@@ -1,0 +1,282 @@
+/* --- BASE RESET & THEME --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at 50% 30%, #15020c 0%, #030005 100%);
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+body::before, body::after {
+    content: '';
+    position: absolute;
+    width: 550px;
+    height: 550px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff0055, #ff00aa);
+    filter: blur(160px);
+    z-index: -1;
+    animation: float 10s infinite alternate ease-in-out;
+}
+body::after {
+    background: linear-gradient(45deg, #6200ff, #ff007f);
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) scale(1); }
+    100% { transform: translateY(40px) scale(1.05); }
+}
+
+/* --- THE GRAND DESKTOP WRAPPER --- */
+.app-container {
+    width: 100%;
+    max-width: 1350px;
+    height: 850px;
+    background: rgba(20, 3, 12, 0.5);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+    border: 1px solid rgba(255, 0, 127, 0.35);
+    border-radius: 24px;
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.85);
+    padding: 25px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.page {
+    display: none;
+    height: 100%;
+}
+.page.active { display: flex; flex-direction: column; }
+
+/* --- LOGIN WRAPPER --- */
+#loginPage {
+    align-items: center;
+    justify-content: center;
+}
+.login-box {
+    width: 100%; max-width: 420px; background: rgba(0, 0, 0, 0.35); padding: 35px;
+    border-radius: 20px; border: 1px solid rgba(255, 0, 127, 0.2);
+}
+.vrinda-neon-logo {
+    font-size: 3.2rem; font-weight: 800; font-style: italic; text-align: center; color: #ff007f;
+    text-shadow: 0 0 20px rgba(255, 0, 127, 0.8), 0 0 40px rgba(255, 0, 127, 0.3); margin-bottom: 5px;
+}
+.subtitle { text-align: center; font-size: 0.85rem; opacity: 0.8; margin-bottom: 25px; color: #ffb3d9; }
+
+/* --- FORMS & INPUTS --- */
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-size: 0.8rem; color: #f472b6; margin-bottom: 8px; }
+.input-group input {
+    width: 100%; padding: 12px 18px; background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; color: #fff; outline: none; transition: 0.3s;
+}
+.input-group input:focus { border-color: #ff007f; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
+
+/* --- PASSWORD CRITERIA CSS --- */
+.rules-container {
+    background: rgba(0, 0, 0, 0.25);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 0, 127, 0.1);
+}
+.rule {
+    font-size: 0.75rem;
+    color: #b3b3b3;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+}
+.rule:last-child { margin-bottom: 0; }
+.rule::before { content: "✕"; margin-right: 8px; color: #ff4d4d; font-weight: bold; }
+.rule.valid { color: #7fdfa3; }
+.rule.valid::before { content: "✓"; color: #2ecc71; }
+
+.btn {
+    width: 100%; padding: 14px; background: linear-gradient(135deg, #ff0055 0%, #ff00aa 100%);
+    border: none; border-radius: 12px; color: white; font-weight: 600; font-size: 1rem; cursor: pointer; transition: 0.3s;
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+}
+.btn:hover { transform: translateY(-2px); filter: brightness(1.15); }
+
+/* Disabled Login Button State */
+.disabled-btn {
+    background: rgba(255, 0, 127, 0.15);
+    border: 1px solid rgba(255, 0, 127, 0.3);
+    color: rgba(255, 255, 255, 0.3);
+    box-shadow: none;
+    pointer-events: none;
+}
+
+/* --- DESKTOP TOP HEADER --- */
+.desktop-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(255, 0, 127, 0.15); padding-bottom: 15px; margin-bottom: 20px;
+}
+.brand-side { display: flex; align-items: center; gap: 20px; }
+.brand-side .brand-text { font-size: 2.2rem; font-weight: 800; font-style: italic; color: #ff007f; text-shadow: 0 0 15px rgba(255, 0, 127, 0.5); }
+.location-badge { background: rgba(255, 255, 255, 0.05); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.08); color: #f472b6; }
+
+.search-container { position: relative; width: 420px; }
+.search-container input {
+    width: 100%; padding: 10px 40px 10px 18px; background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 25px; color: #fff; outline: none; transition: 0.3s;
+}
+.search-container input:focus { border-color: #ff007f; background: rgba(255, 255, 255, 0.07); }
+.search-icon { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); color: #f472b6; }
+
+.logout-btn { background: rgba(255, 0, 127, 0.1); border: 1px solid rgba(255, 0, 127, 0.4); color: white; padding: 8px 16px; border-radius: 20px; cursor: pointer; transition: 0.2s; }
+.logout-btn:hover { background: #ff007f; box-shadow: 0 0 15px rgba(255,0,127,0.5); }
+
+/* --- SPLIT LAYOUT ENGINE --- */
+.desktop-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 25px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+.main-content::-webkit-scrollbar { width: 6px; }
+.main-content::-webkit-scrollbar-thumb { background: rgba(255, 0, 127, 0.3); border-radius: 10px; }
+
+.vrinda-tabs { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
+.vrinda-tabs::-webkit-scrollbar { display: none; }
+.tab-item { padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; cursor: pointer; color: #a1a1aa; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); white-space: nowrap; transition: 0.3s; }
+.active-tab { background: rgba(255, 0, 127, 0.18); color: #fff; border-color: #ff007f; font-weight: 600; }
+
+.section-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 15px; color: #cbd5e1; }
+
+/* FOOD GRID DESIGN */
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
+}
+.food-card {
+    background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px; overflow: hidden; position: relative; display: flex; flex-direction: column; transition: 0.3s;
+}
+.food-card:hover { border-color: #ff007f; transform: translateY(-3px); background: rgba(255, 255, 255, 0.04); }
+
+.food-img-wrapper { height: 110px; background: rgba(255,255,255,0.01); display: flex; align-items: center; justify-content: center; font-size: 3.8rem; position: relative; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.discount-tag { position: absolute; bottom: 8px; left: 8px; background: #ff007f; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 5px; box-shadow: 0 4px 8px rgba(255,0,127,0.4); }
+
+.food-details { padding: 12px; display: flex; flex-direction: column; gap: 4px; padding-bottom: 50px; }
+.first-row, .second-row { display: flex; justify-content: space-between; align-items: center; }
+.first-row h4 { font-size: 0.95rem; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
+.rating { background: rgba(255, 0, 127, 0.15); color: #ff007f; font-size: 0.7rem; font-weight: 600; padding: 1px 6px; border-radius: 5px; border: 1px solid rgba(255,0,127,0.2); }
+.cuisine { font-size: 0.75rem; color: #a1a1aa; }
+.price { font-size: 0.8rem; color: #f472b6; font-weight: 500; }
+
+.add-btn { position: absolute; bottom: 12px; right: 12px; background: rgba(255, 0, 127, 0.1); border: 1px solid #ff007f; padding: 4px 14px; border-radius: 8px; color: #fff; font-weight: 600; font-size: 0.75rem; cursor: pointer; transition: 0.2s; }
+.add-btn:hover { background: #ff007f; box-shadow: 0 0 12px rgba(255,0,127,0.6); }
+
+/* SIDE PANEL */
+.side-panel { background: rgba(0, 0, 0, 0.15); border-left: 1px solid rgba(255, 0, 127, 0.1); padding-left: 20px; overflow-y: auto; }
+.panel-sticky-wrapper { position: relative; }
+.side-panel h3 { font-size: 1rem; font-weight: 600; margin-bottom: 15px; color: #f472b6; text-transform: uppercase; letter-spacing: 1px; }
+
+.balance-card {
+    background: linear-gradient(135deg, rgba(255, 0, 127, 0.1) 0%, rgba(123, 0, 255, 0.1) 100%);
+    border: 1px solid rgba(255, 0, 127, 0.25); border-radius: 16px; padding: 15px; text-align: center; margin-bottom: 15px;
+}
+.rupee-symbol { font-size: 2.2rem; color: #ff007f; text-shadow: 0 0 10px rgba(255, 0, 127, 0.4); }
+.balance-amount { font-size: 1.6rem; font-weight: 700; }
+
+.cart-box { background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 16px; padding: 15px; margin-bottom: 15px; }
+.cart-items-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; max-height: 220px; overflow-y: auto; }
+.cart-items-list::-webkit-scrollbar { width: 4px; }
+.cart-items-list::-webkit-scrollbar-thumb { background: rgba(255,0,127,0.2); }
+.cart-item-row { display: flex; justify-content: space-between; font-size: 0.85rem; background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.03); }
+
+.bill-details { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.bill-row { display: flex; justify-content: space-between; font-size: 0.8rem; color: #a1a1aa; }
+.total-highlight { color: #ff007f; font-weight: 700; font-size: 0.95rem; margin-top: 4px; border-top: 1px dashed rgba(255, 0, 127, 0.3); padding-top: 8px; }
+.place-order-btn { padding: 12px; font-size: 0.95rem; }
+
+/* ================= PREMIUM GLASS PAYMENT MODAL ENGINE ================= */
+.payment-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 2, 7, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInModal 0.3s ease-out;
+}
+@keyframes fadeInModal {
+    from { opacity: 0; } to { opacity: 1; }
+}
+
+.payment-modal-box {
+    background: rgba(30, 4, 18, 0.6);
+    border: 1px solid rgba(255, 0, 127, 0.35);
+    border-radius: 20px;
+    width: 100%; max-width: 460px;
+    padding: 30px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.9);
+    position: relative;
+    color: #fff;
+}
+
+.close-modal-btn {
+    position: absolute; top: 15px; right: 20px;
+    background: none; border: none; color: #cbd5e1;
+    font-size: 1.2rem; cursor: pointer; transition: 0.2s;
+}
+.close-modal-btn:hover { color: #ff007f; }
+
+.payment-modal-box h3 { font-size: 1.4rem; color: #ff007f; text-shadow: 0 0 10px rgba(255,0,127,0.3); margin-bottom: 4px; text-align: center;}
+.payment-subtitle { font-size: 0.8rem; color: #a1a1aa; text-align: center; margin-bottom: 20px; }
+
+.receipt-summary {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px; padding: 15px; margin-bottom: 20px;
+}
+.receipt-row { display: flex; justify-content: space-between; font-size: 0.85rem; color: #cbd5e1; margin-bottom: 8px; }
+.receipt-row.total-row {
+    margin-bottom: 0; padding-top: 10px;
+    border-top: 1px dashed rgba(255, 0, 127, 0.4);
+    color: #fff; font-weight: 700; font-size: 1rem;
+}
+.receipt-row.total-row span:last-child { color: #ff007f; }
+
+.payment-methods { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+.pay-option-card {
+    display: flex; align-items: center; gap: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 15px; border-radius: 12px; cursor: pointer; transition: 0.3s;
+}
+.pay-option-card:hover { border-color: rgba(255,0,127,0.5); background: rgba(255,255,255,0.04); }
+.pay-option-card input { accent-color: #ff007f; transform: scale(1.1); }
+.pay-icon { font-size: 1.6rem; }
+.pay-info strong { font-size: 0.9rem; color: #fff; }
+.pay-info p { font-size: 0.75rem; color: #a1a1aa; }
+
+.final-pay-btn { background: #ff007f; box-shadow: 0 0 20px rgba(255,0,127,0.5); }

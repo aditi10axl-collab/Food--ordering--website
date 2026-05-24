@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vrinda Foodie - 42 Elite Items Grand Pink Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- ================= PAGE 1: DESKTOP LOGIN ================= -->
+        <div id="loginPage" class="page active">
+            <div class="login-box">
+                <div class="vrinda-neon-logo">vrinda foodie</div>
+                <p class="subtitle">Next-Gen Luxury Dining & Fast Desktop Delivery</p>
+                
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label>Mobile Number or Email</label>
+                        <input type="text" id="username" placeholder="Enter your credentials..." required autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+
+                    <!-- PASSWORD CRITERIA CONTAINER -->
+                    <div class="rules-container">
+                        <div class="rule" id="ruleLength">Kam se kam 8 Characters</div>
+                        <div class="rule" id="ruleUpper">Kam se kam 1 Capital Letter (A-Z)</div>
+                        <div class="rule" id="ruleSpecial">Kam se kam 1 Special Symbol (@, #, $, %)</div>
+                    </div>
+
+                    <button type="submit" class="btn disabled-btn" id="loginBtn">Login to Portal</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= MAIN DESKTOP APPLICATION INTERFACE ================= -->
+        <div id="dashboardPage" class="page">
+            
+            <!-- TOP BAR -->
+            <header class="desktop-header">
+                <div class="brand-side">
+                    <span class="brand-text">vrinda foodie</span>
+                    <div class="location-badge">📍 Mumbai Corporate Hub, IN</div>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" id="menuSearch" onkeyup="searchFood()" placeholder="Search from our 40+ luxury delicacies...">
+                    <span class="search-icon">🔍</span>
+                </div>
+
+                <div class="user-actions">
+                    <button class="logout-btn" id="navLogout">Sign Out 🚪</button>
+                </div>
+            </header>
+
+            <!-- SPLIT SCREEN LAYOUT -->
+            <div class="desktop-layout">
+                
+                <!-- LEFT SIDE: FILTERS & GRAND INVENTORY GRID -->
+                <main class="main-content">
+                    <div class="vrinda-tabs">
+                        <div class="tab-item active-tab" onclick="filterCategory('all')">✨ All Items (42)</div>
+                        <div class="tab-item" onclick="filterCategory('burger')">🍔 Burgers</div>
+                        <div class="tab-item" onclick="filterCategory('pizza')">🍕 Pizzas</div>
+                        <div class="tab-item" onclick="filterCategory('biryani')">🍛 Biryanis</div>
+                        <div class="tab-item" onclick="filterCategory('asian')">🥢 Pan-Asian</div>
+                        <div class="tab-item" onclick="filterCategory('shakes')">🥤 Shakes</div>
+                        <div class="tab-item" onclick="filterCategory('dessert')">🍰 Desserts</div>
+                    </div>
+
+                    <h3 class="section-title" id="gridTitle">Inspiration for your premium order (42 Options)</h3>
+                    
+                    <!-- Dynamic Grid Injector via JS -->
+                    <div class="food-grid" id="foodGridContainer">
+                        <!-- 42 items will be rendered automatically by script.js -->
+                    </div>
+                </main>
+
+                <!-- RIGHT SIDE: RUPEE PANEL (WALLET & BILLING) -->
+                <aside class="side-panel">
+                    <div class="panel-sticky-wrapper">
+                        <h3>Rupee Dashboard</h3>
+                        
+                        <div class="balance-card">
+                            <div class="rupee-symbol">₹</div>
+                            <div class="balance-amount" id="walletBalance">1500.00</div>
+                            <p style="font-size: 0.8rem; color: #f472b6; margin-top: 5px;">Vrinda Premium Credits</p>
+                        </div>
+
+                        <!-- Bill Box -->
+                        <div class="cart-box">
+                            <h4 style="font-size: 1rem; color: #fff; margin-bottom: 12px;">Live Checkout Cart</h4>
+                            <div id="cartItemsList" class="cart-items-list">
+                                <p style="color: #f472b6; font-size: 0.85rem; text-align: center; padding: 30px 0; opacity: 0.7;">Aapka cart khali hai. Menu se tasty items add karein!</p>
+                            </div>
+                            
+                            <div class="bill-details">
+                                <div class="bill-row"><span>Item Total</span><span id="billItemTotal">₹0</span></div>
+                                <div class="bill-row"><span>Delivery Charges</span><span id="billDelivery">₹0</span></div>
+                                <div class="bill-row total-highlight"><span>Grand Total</span><span id="cartTotalAmount">₹0</span></div>
+                            </div>
+                        </div>
+
+                        <button class="btn place-order-btn" id="placeOrderBtn">Confirm & Transact Order 🚀</button>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= PREMIUM GLASSMORPHISM PAYMENT MODAL ================= -->
+    <div class="payment-overlay" id="paymentModal">
+        <div class="payment-modal-box">
+            <button class="close-modal-btn" id="closePaymentBtn">✕</button>
+            <h3>Vrinda Gateway Secure Pay</h3>
+            <p class="payment-subtitle">Choose payment method to authorize checkout</p>
+            
+            <div class="receipt-summary">
+                <div class="receipt-row"><span>Order Value:</span><span id="modalItemTotal">₹0</span></div>
+                <div class="receipt-row"><span>Delivery Fee:</span><span id="modalDelivery">₹45</span></div>
+                <div class="receipt-row total-row"><span>Amount To Deduct:</span><span id="modalGrandTotal">₹0</span></div>
+            </div>
+
+            <div class="payment-methods">
+                <label class="pay-option-card active-pay">
+                    <input type="radio" name="payMethod" checked>
+                    <span class="pay-icon">📱</span>
+                    <div class="pay-info">
+                        <strong>Instant UPI</strong>
+                        <p>Pay via GooglePay, PhonePe, Paytm</p>
+                    </div>
+                </label>
+                <label class="pay-option-card">
+                    <input type="radio" name="payMethod">
+                    <span class="pay-icon">💳</span>
+                    <div class="pay-info">
+                        <strong>Corporate Credit Card</strong>
+                        <p>1-Click Fast Secured Settlement</p>
+                    </div>
+                </label>
+            </div>
+
+            <button class="btn final-pay-btn" id="executePayBtn">Pay & Process Securely 🔒</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
